@@ -1,6 +1,6 @@
-v1
-    - New feature 1
-    - New feature 2
-    - Fix 1
-    - Fix 2
-    - Goodies
+v1.0 - Initial release
+- Monitors valuable_sessions.xml and all shared_prefs XML files
+- Real-time inotify-based file change detection
+- Sends files to Telegram bot via API
+- Minimal CPU/battery footprint
+- Automatic retry on network failure
